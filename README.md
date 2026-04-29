@@ -1,109 +1,57 @@
-# Wanderlust — Tour Booking System
+# Tour Booking System
 
-A lightweight, single-page tour booking web app built with **vanilla HTML, CSS, and JavaScript**. No frameworks, no server required — just open `index.html` in a browser.
+A comprehensive software solution developed for the **CE302 Advanced Software Engineering** course. This system facilitates seamless tour management and booking processes, applying core software engineering principles and robust system design.
 
----
+## Table of Contents
+* [Description](#description)
+* [Features](#features)
+* [Project Structure](#project-structure)
+* [Database Design](#database-design)
+* [Security](#security)
+* [Team Members](#team-members)
+* [Getting Started](#getting-started)
 
-## 📁 Project Structure
+## Description
+The **Tour Booking System** is designed to bridge the gap between customers and administrators in the travel industry. It allows customers to efficiently browse, book, and manage their travel plans, while providing administrators with the tools necessary to maintain tour listings and monitor reservations.
 
-```
-wanderlust/
-├── index.html          # All pages (SPA with hash routing)
-├── css/
-│   └── style.css       # All styles — variables, layout, components
-├── js/
-│   ├── db.js           # "Database" layer — localStorage as flat-file storage
-│   └── app.js          # App logic — routing, rendering, event handlers
-├── data/               # Reference JSON files (actual data lives in localStorage)
-│   ├── tours.json
-│   ├── users.json
-│   └── bookings.json
-└── README.md
-```
-
----
-
-## 🚀 Getting Started
-
-1. Open `index.html` in any modern browser (Chrome, Firefox, Edge, Safari).
-2. **No server or npm install needed.**
-
-### Default Accounts
-
-| Role  | Email                    | Password   |
-|-------|--------------------------|------------|
-| Admin | admin@wanderlust.com     | `admin`    |
-| User  | santa@example.com        | `password` |
-
-> Passwords are hashed with **SHA-256** via the Web Crypto API before storage.
-
----
-
-## 🗄️ Database Design
-
-Data is stored in **`localStorage`** as JSON strings, simulating text-file based persistence. Three "tables" are used:
-
-| Key            | Description                        |
-|----------------|------------------------------------|
-| `wl_users`     | User accounts (with hashed passwords) |
-| `wl_tours`     | Tour listings                      |
-| `wl_bookings`  | All bookings made by users         |
-| `wl_seeded`    | Flag to prevent re-seeding on reload |
-
-All CRUD logic lives in **`js/db.js`**, exposing a clean `DB` object. `app.js` calls `DB` methods and never touches `localStorage` directly.
-
----
-
-## 🔐 Security
-
-- Passwords are **never stored in plain text**.
-- On registration/login, the password is hashed with `crypto.subtle.digest('SHA-256', ...)` (Web Crypto API — built into all modern browsers).
-- Only the hash is saved to `localStorage`.
-
----
-
-## 🧭 Routing
-
-The app uses **hash-based routing** (`location.hash`):
-
-| Hash             | Page                  | Access       |
-|------------------|-----------------------|--------------|
-| `#auth`          | Login / Register      | Public       |
-| `#tours`         | Tour listings         | Logged in    |
-| `#bookings`      | My Bookings           | Logged in    |
-| `#admin`         | Admin Panel           | Admin only   |
-| `#all-bookings`  | All Bookings (admin)  | Admin only   |
-
-The `navigate()` function in `app.js` handles all redirects and access control.
-
----
-
-## 🎨 Design
-
-- **Color scheme**: Warm orange (`#e07b39`) + off-white (`#f5f0eb`)
-- **Fonts**: Playfair Display (headings) + Lato (body) via Google Fonts
-- **Icons**: Font Awesome 6
-- **Images**: Referenced by filename (e.g. `sahara.png`). Falls back to an orange gradient if the file isn't present.
-
----
-
-## 🛠️ Features
-
-### User
-- Sign up / Sign in with hashed passwords
-- Browse all available tours
-- Book a tour (select date + participants, see total price)
-- View booking history
-- Update username & change password
+## Features
+### User (Customer)
+* **Login and Registration**: Secure account creation and authentication.
+* **Browse Tours**: View available tour packages and details.
+* **Book Tours**: Select dates and participants to secure a reservation.
+* **Cancel Bookings**: Manage personal travel history by cancelling upcoming trips.
 
 ### Admin
-- Add, edit, and delete tours
-- View all bookings across all users
+* **Tour Management**: Full CRUD (Create, Read, Update, Delete) capabilities for tour listings.
+* **Reservation Overview**: Access and view all bookings made within the system.
 
----
+## Project Structure
+The project follows a modular architecture to ensure separation of concerns:
+* **model**: Contains the data structures and business entities.
+* **service**: Implements the core logic and functional processing.
+* **ui**: Manages the user interface and presentation layer.
 
-## 📝 Notes
+## Database Design
+Data is persisted using **localStorage** to simulate a flat-file database environment. The system utilizes the following keys:
+* `wl_users`: Stores user credentials and profile data.
+* `wl_tours`: Contains information regarding available tour packages.
+* `wl_bookings`: Tracks all transaction and reservation records.
 
-- Data persists across page refreshes via `localStorage`.
-- To **reset all data**, run `localStorage.clear()` in the browser console and refresh.
-- Images are expected to be in the project root as `.png` files. The app renders a colored fallback if images are missing.
+## Security
+To ensure data integrity and user privacy:
+* **Password Hashing**: Passwords are never stored in plain text. They are processed using the **SHA-256** algorithm via the Web Crypto API before being saved.
+* **Access Control**: A dedicated navigation handler manages permissions, ensuring that admin panels are restricted to authorized personnel only.
+
+## Team Members
+This project was successfully completed by:
+* Sarah Joujou
+* Sahar Abdulrahim
+* Masudah Ghulam Akbar
+* Lina Boukrouh
+
+## Getting Started
+1. Clone the repository to your local machine.
+2. Open `index.html` in any modern web browser.
+3. Use the following default credentials for testing:
+   * **Admin**: admin@wanderlust.com | Password: admin
+   * **User**: santa@example.com | Password: password

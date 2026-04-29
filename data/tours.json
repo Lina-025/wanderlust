@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "name": "Sahara Desert Adventure",
+    "location": "Morocco",
+    "days": 3,
+    "price": 299,
+    "rating": 4.8,
+    "seats": 15,
+    "description": "Experience the magic of the Sahara with camel rides, stargazing, and traditional Berber camps.",
+    "image": "./images/saharadesert.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Bali Temple Trail",
+    "location": "Indonesia",
+    "days": 2,
+    "price": 199,
+    "rating": 4.7,
+    "seats": 19,
+    "description": "Explore ancient temples, lush rice terraces, and spiritual ceremonies across Bali.",
+    "image": "./images/bali temple trail.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Northern Lights Expedition",
+    "location": "Iceland",
+    "days": 4,
+    "price": 499,
+    "rating": 4.9,
+    "seats": 12,
+    "description": "Chase the aurora borealis across the Arctic wilderness with expert guides.",
+    "image": "./images/northern lights.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Amalfi Coast Sailing",
+    "location": "Italy",
+    "days": 5,
+    "price": 379,
+    "rating": 4.6,
+    "seats": 10,
+    "description": "Sail along the stunning Amalfi Coast with stops at Positano, Ravello, and hidden coves.",
+    "image": "./images/amalfi coast.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Machu Picchu Trek",
+    "location": "Peru",
+    "days": 7,
+    "price": 449,
+    "rating": 4.9,
+    "seats": 15,
+    "description": "Trek the Inca Trail through cloud forests and Andean peaks to the lost city.",
+    "image": "./images/machu picchu.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Tokyo Street Food Tour",
+    "location": "Japan",
+    "days": 2,
+    "price": 89,
+    "rating": 4.8,
+    "seats": 12,
+    "description": "Dive into Tokyo's legendary street food scene across Shibuya, Shinjuku, and Asakusa.",
+    "image": "./images/tokyo street food tour.jpg"
+  }
+]

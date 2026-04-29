@@ -1,0 +1,284 @@
+/* ===== WANDERLUST - MAIN STYLESHEET =====
+   Orange & warm earth tones, clean cards, travel vibes
+   ================================================== */
+
+/* ---- CSS Variables ---- */
+:root {
+  --orange: #e07b39;
+  --orange-dark: #c4612a;
+  --orange-light: #f5dcc8;
+  --bg: #f5f0eb;
+  --white: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: #6b6b6b;
+  --border: #e0d8d0;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --radius: 12px;
+}
+
+/* ---- Reset & Base ---- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Georgia, 'Times New Roman', serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+button { cursor: pointer; font-family: inherit; }
+input { font-family: inherit; }
+
+/* ---- PAGES (sections shown/hidden) ---- */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ===== AUTH PAGE ===== */
+#auth-page {
+  display: none;
+  min-height: 100vh;
+  flex-direction: row; /* overridden by .active */
+}
+#auth-page.active { display: flex; }
+
+.auth-hero {
+  flex: 0 0 50%;
+  background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)),
+              url('../images/hero.jpg') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 48px;
+  color: #fff;
+}
+.auth-hero h2 { font-size: 2.4rem; line-height: 1.2; margin-bottom: 12px; }
+.auth-hero p  { font-size: 1rem; opacity: 0.85; }
+
+.auth-panel {
+  flex: 1;
+  display: flex;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+}
+.auth-logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: bold; margin-bottom: 32px; color: var(--text); }
+.auth-logo i { color: var(--orange); font-size: 1.6rem; }
+
+.auth-card { background: var(--white); border-radius: var(--radius); padding: 32px; width: 100%; max-width: 420px;  box-shadow: var(--shadow); }
+.auth-card h3 { font-size: 1.6rem; margin-bottom: 16px; }
+.auth-card .subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
+
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; font-size: 0.9rem; margin-bottom: 6px; color: var(--text); }
+.form-group input {
+  width: 100%; padding: 10px 14px; border: 1.5px solid var(--border);
+  border-radius: 8px; font-size: 0.95rem; background: var(--white);
+  transition: border-color 0.2s;
+}
+.form-group input:focus { outline: none; border-color: var(--orange); }
+
+.btn-primary {
+  width: 100%; padding: 12px; background: var(--orange); color: #fff;
+  border: none; border-radius: 8px; font-size: 1rem; font-weight: bold;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--orange-dark); }
+
+.auth-switch { text-align: center; margin-top: 16px; font-size: 0.9rem; color: var(--text-muted); }
+.auth-switch a { color: var(--orange); text-decoration: none; cursor: pointer; }
+.auth-switch a:hover { text-decoration: underline; }
+
+/* ===== NAVBAR ===== */
+nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  position: sticky; top: 0; z-index: 100;
+}
+.nav-logo { display: flex; align-items: center; gap: 8px; font-size: 1.2rem; font-weight: bold; color: var(--text); text-decoration: none; }
+.nav-logo i { color: var(--orange); }
+.nav-links { display: flex; align-items: center; gap: 8px; }
+.nav-btn {
+  padding: 7px 16px; border-radius: 20px; font-size: 0.9rem;
+  border: 1.5px solid var(--border); background: transparent;
+  color: var(--text); transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+}
+.nav-btn:hover { border-color: var(--orange); color: var(--orange); }
+.nav-btn.active-nav { background: var(--orange-light); border-color: var(--orange-light); color: var(--text); }
+.nav-btn.danger { color: #c0392b; border-color: #e0c0bc; }
+.nav-btn.danger:hover { background: #fdecea; }
+
+/* ===== HERO BANNER ===== */
+.hero-banner {
+  background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)),
+              url('../images/hero.jpg') center/cover no-repeat;
+  color: #fff;
+  text-align: center;
+  padding: 80px 20px;
+}
+.hero-banner h1 { font-size: 2.8rem; margin-bottom: 10px; }
+.hero-banner p  { font-size: 1.1rem; opacity: 0.85; }
+
+/* ===== TOURS GRID ===== */
+.tours-section { padding: 40px; }
+.tours-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+
+.tour-card {
+  background: var(--white); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.tour-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+
+.tour-img-wrap { position: relative; }
+.tour-img-wrap img { width: 100%; height: 200px; object-fit: cover; display: block; }
+.tour-price-badge {
+  position: absolute; top: 12px; right: 12px;
+  background: var(--white); border-radius: 20px;
+  padding: 4px 12px; font-weight: bold; font-size: 0.95rem;
+  box-shadow: var(--shadow);
+}
+
+.tour-body { padding: 16px; }
+.tour-meta { display: flex; gap: 12px; color: var(--text-muted); font-size: 0.82rem; margin-bottom: 8px; align-items: center; }
+.tour-meta i { color: var(--orange); }
+.tour-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.tour-card p  { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5; }
+.tour-footer { display: flex; align-items: center; justify-content: space-between; }
+.tour-seats { font-size: 0.82rem; color: var(--text-muted); }
+.btn-book {
+  padding: 8px 20px; background: var(--orange); color: #fff;
+  border: none; border-radius: 8px; font-size: 0.9rem; font-weight: bold;
+  transition: background 0.2s;
+}
+.btn-book:hover { background: var(--orange-dark); }
+
+/* ===== MODAL ===== */
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5); z-index: 200;
+  align-items: center; justify-content: center;
+}
+.overlay.open { display: flex; }
+
+.modal {
+  background: var(--white); border-radius: var(--radius);
+  padding: 32px; width: 460px; max-width: 95vw;
+  position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+.modal h3 { font-size: 1.3rem; margin-bottom: 4px; }
+.modal .modal-sub { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; }
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  background: none; border: none; font-size: 1.2rem;
+  color: var(--text-muted); cursor: pointer;
+}
+
+.total-box {
+  background: var(--orange-light); border-radius: 8px;
+  padding: 14px 20px; display: flex; justify-content: space-between;
+  align-items: center; margin: 16px 0; font-size: 1rem;
+}
+.total-box strong { font-size: 1.3rem; }
+
+/* ===== MY BOOKINGS ===== */
+.bookings-section { padding: 40px; max-width: 900px; }
+.bookings-section h2 { font-size: 2rem; margin-bottom: 6px; }
+.bookings-section .sub { color: var(--text-muted); margin-bottom: 28px; }
+
+.booking-item {
+  display: flex; align-items: center; gap: 20px;
+  background: var(--white); border-radius: var(--radius);
+  padding: 16px 20px; margin-bottom: 16px; box-shadow: var(--shadow);
+}
+.booking-thumb { width: 90px; height: 65px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+.booking-info { flex: 1; }
+.booking-info h4 { font-size: 1rem; margin-bottom: 4px; }
+.booking-meta { font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 14px; align-items: center; }
+.booking-meta i { color: var(--orange); }
+.booking-right { text-align: right; }
+.booking-right .price { font-size: 1.1rem; font-weight: bold; }
+.badge { background: var(--orange); color: #fff; border-radius: 20px; padding: 3px 12px; font-size: 0.78rem; font-weight: bold; }
+.btn-cancel {
+  margin-top: 8px;
+  padding: 2px 16px;
+  border: 1px solid var(--orange);
+  background: transparent;
+  color: var(--orange);
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+.btn-cancel:hover { background: #fdecea; }
+
+/* ===== ADMIN ===== */
+.admin-layout { display: grid; grid-template-columns: 1fr 380px; gap: 32px; padding: 40px; }
+
+.admin-tours-list {
+  background: var(--white); border-radius: var(--radius);
+  padding: 20px; box-shadow: var(--shadow); min-height: 200px;
+}
+.admin-tours-list h3 { margin-bottom: 16px; }
+
+.admin-tour-item {
+  padding: 10px 14px; border-radius: 8px; cursor: pointer;
+  font-size: 0.9rem; margin-bottom: 4px;
+  transition: background 0.15s;
+}
+.admin-tour-item:hover { background: var(--orange-light); }
+.admin-tour-item.selected { background: var(--orange-light); font-weight: bold; }
+
+.btn-delete-all {
+  width: 100%; margin-top: 12px; padding: 10px;
+  background: #c0392b; color: #fff; border: none; border-radius: 8px;
+  font-size: 0.9rem; font-weight: bold;
+}
+.btn-delete-all:hover { background: #a93226; }
+
+.admin-form-panel { background: var(--white); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+.admin-form-panel h3 { margin-bottom: 20px; }
+.admin-form-panel input, .admin-form-panel textarea {
+  width: 100%; padding: 9px 12px; border: 1.5px solid var(--border);
+  border-radius: 8px; font-size: 0.9rem; margin-bottom: 12px; background: var(--orange-light);
+  font-family: inherit;
+}
+.admin-form-panel textarea { height: 70px; resize: vertical; }
+.admin-form-panel input:focus, .admin-form-panel textarea:focus { outline: none; border-color: var(--orange); background: var(--white); }
+.admin-form-panel label { font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 4px; }
+
+.btn-add { width: 100%; padding: 11px; background: var(--orange); color: #fff; border: none; border-radius: 8px; font-weight: bold; margin-bottom: 8px; }
+.btn-update { width: 100%; padding: 11px; background: transparent; color: var(--orange); border: 1.5px solid var(--orange); border-radius: 8px; font-weight: bold; }
+
+.all-bookings-section { padding: 40px; max-width: 800px; }
+.all-bookings-section h2 { margin-bottom: 24px; }
+.admin-booking-card { background: var(--white); border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; box-shadow: var(--shadow); }
+.admin-booking-card h4 { margin-bottom: 6px; }
+.admin-booking-card p  { font-size: 0.85rem; color: var(--text-muted); }
+.admin-booking-card .btn-cancel { margin-top: 10px; }
+
+/* ===== TOAST ===== */
+#toast {
+  position: fixed; bottom: 24px; right: 24px; z-index: 999;
+  background: #1a1a1a; color: #fff; padding: 12px 20px;
+  border-radius: 8px; font-size: 0.9rem;
+  transform: translateY(80px); opacity: 0;
+  transition: all 0.3s; pointer-events: none;
+}
+#toast.show { transform: translateY(0); opacity: 1; }
+#toast.success { background: #27ae60; }
+#toast.error   { background: #c0392b; }
+
+/* ===== MISC ===== */
+.page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.empty-msg { color: var(--text-muted); font-size: 0.95rem; padding: 20px; text-align: center; }
+
+@media (max-width: 900px) {
+  .tours-grid { grid-template-columns: 1fr 1fr; }
+  .admin-layout { grid-template-columns: 1fr; }
+  .auth-hero { display: none; }
+  .auth-panel { width: 100%; }
+}
+@media (max-width: 600px) {
+  .tours-grid { grid-template-columns: 1fr; }
+  nav { padding: 0 16px; }
+  .tours-section, .bookings-section, .admin-layout { padding: 20px; }
+}

@@ -17,48 +17,67 @@ const state = {
 };
 
 /* ============================================================
-   ROUTER — map hash to page & render function
+   ROUTER — navigation controller for hash-based page switching
    ============================================================ */
-const routes = {
-  '#auth':         { page: 'auth-page',          render: renderAuth         },
-  '#tours':        { page: 'tours-page',          render: renderTours        },
-  '#bookings':     { page: 'bookings-page',       render: renderBookings     },
-  '#admin':        { page: 'admin-page',          render: renderAdmin        },
-  '#all-bookings': { page: 'all-bookings-page',   render: renderAllBookings  },
-};
-
-function navigate(hash) {
-  // Redirect to auth if not logged in and not going to auth
-  if (!state.user && hash !== '#auth') { location.hash = '#auth'; return; }
-  // Redirect away from auth if already logged in
-  if (state.user && hash === '#auth')  { location.hash = '#tours'; return; }
-  // Admins only on admin pages
-  if ((hash === '#admin' || hash === '#all-bookings') && state.user?.role !== 'admin') {
-    location.hash = '#tours'; return;
+class NavigationController {
+  // Owns route definitions plus the rules for who can view each page.
+  constructor(appState) {
+    this.state = appState;
+    this.routes = {
+      '#auth':         { page: 'auth-page',         render: renderAuth },
+      '#tours':        { page: 'tours-page',        render: renderTours },
+      '#bookings':     { page: 'bookings-page',     render: renderBookings },
+      '#admin':        { page: 'admin-page',        render: renderAdmin },
+      '#all-bookings': { page: 'all-bookings-page', render: renderAllBookings },
+    };
   }
 
-  const route = routes[hash] || routes['#tours'];
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(route.page).classList.add('active');
-  route.render();
-  updateNav(hash);
+  // Handles redirects, page activation, and page rendering for the current hash.
+  navigate(hash) {
+    // Redirect to auth if not logged in and not going to auth
+    if (!this.state.user && hash !== '#auth') { location.hash = '#auth'; return; }
+    // Redirect away from auth if already logged in
+    if (this.state.user && hash === '#auth')  { location.hash = '#tours'; return; }
+    // Admins only on admin pages
+    if ((hash === '#admin' || hash === '#all-bookings') && this.state.user?.role !== 'admin') {
+      location.hash = '#tours'; return;
+    }
+
+    const route = this.routes[hash] || this.routes['#tours'];
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(route.page).classList.add('active');
+    route.render();
+    this.updateNav(hash);
+  }
+
+  // Updates the nav bar so the active route and admin-only link stay in sync.
+  updateNav(hash) {
+    if (!this.state.user) { document.getElementById('main-nav').style.display = 'none'; return; }
+    document.getElementById('main-nav').style.display = 'flex';
+
+    // Highlight active nav link
+    document.querySelectorAll('.nav-btn[data-route]').forEach(btn => {
+      btn.classList.toggle('active-nav', btn.dataset.route === hash);
+    });
+
+    // Show admin link only for admins
+    document.getElementById('admin-nav-btn').style.display =
+      this.state.user.role === 'admin' ? 'inline-flex' : 'none';
+  }
+}
+
+const navigation = new NavigationController(state);
+
+// Thin wrappers keep the rest of the file unchanged while routing now lives in a class.
+function navigate(hash) {
+  navigation.navigate(hash);
 }
 
 function updateNav(hash) {
-  if (!state.user) { document.getElementById('main-nav').style.display = 'none'; return; }
-  document.getElementById('main-nav').style.display = 'flex';
-
-  // Highlight active nav link
-  document.querySelectorAll('.nav-btn[data-route]').forEach(btn => {
-    btn.classList.toggle('active-nav', btn.dataset.route === hash);
-  });
-
-  // Show admin link only for admins
-  document.getElementById('admin-nav-btn').style.display =
-    state.user.role === 'admin' ? 'inline-flex' : 'none';
+  navigation.updateNav(hash);
 }
 
-window.addEventListener('hashchange', () => navigate(location.hash));
+window.addEventListener('hashchange', () => navigation.navigate(location.hash));
 
 /* ============================================================
    TOAST NOTIFICATION
